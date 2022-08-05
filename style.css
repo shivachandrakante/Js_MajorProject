@@ -38,13 +38,21 @@ body{
 }
 
 .inputBox{
-    width: 80%;
+    width: 70%;
     border-radius: 1.25em;
     padding-top: 0.625em;
     padding-bottom: 0.625em;
 }
 
 .submitComment{
+    width: 2rem;
+    background-color: #9645E9;
+    max-width: 10%;
+    border: none;
+    text-align: center;
+    border-radius: 50%;
+}
+.deleteComment{
     width: 2rem;
     background-color: #9645E9;
     max-width: 10%;
@@ -84,6 +92,9 @@ body{
 }
 .textContentAndDelete button{
     width: 10%;
+    align-self: flex-start;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
 }
 .likeDislikeAddComment{
     display: flex;

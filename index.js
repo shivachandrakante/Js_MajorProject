@@ -18,6 +18,9 @@ function deleteThreadIcon(node){
     let deleteIcon = document.createElement("button")
     deleteIcon.classList.add("deleteIcon")
     deleteIcon.innerHTML = `<span class="material-symbols-outlined">delete</span>`
+    deleteIcon.addEventListener('click',function(){
+        deleteInputTag(deleteIcon.parentElement)
+    })
     return deleteIcon
 }
 function createThreadTextBlock(node){
@@ -57,12 +60,37 @@ function CreateReplyCommentIcon(){
     })
     return replyIcon
 }
+function unFoldThreads(node){
+    while(node.nextSibling !== null ){
+        if (node.nextSibling.style.display === "none") {
+            node.nextSibling.style.display = "block";
+        } else {
+            node.nextSibling.style.display = "none";
+        }
+        node = node.nextSibling
+    }
+}
+function CreateExpandIcon(){
+    let unFoldIcon = document.createElement("button")
+    unFoldIcon.classList.add("expanndIcon")
+    unFoldIcon.innerHTML = `<span class="material-symbols-outlined">unfold_less</span>`
+    unFoldIcon.addEventListener('click',function(){
+        if(unFoldIcon.innerHTML === `<span class="material-symbols-outlined">unfold_less</span>`){
+            unFoldIcon.innerHTML = `<span class="material-symbols-outlined">unfold_more</span>`
+        } else{
+            unFoldIcon.innerHTML = `<span class="material-symbols-outlined">unfold_less</span>`
+        }
+        unFoldThreads(unFoldIcon.parentElement)
+    })
+    return unFoldIcon
+}
 function createThreadBtnBlock(node){
     let ThreadBtnBlock = document.createElement("div")
     ThreadBtnBlock.appendChild(createLikeIcon())
     ThreadBtnBlock.appendChild(createdisLikeIcon())
     ThreadBtnBlock.appendChild(createAddCommentIcon())
     ThreadBtnBlock.appendChild(CreateReplyCommentIcon())
+    ThreadBtnBlock.appendChild(CreateExpandIcon())
     return ThreadBtnBlock
 }
 function createThread(node){
@@ -86,6 +114,19 @@ function createComment(button){
     thread.style.marginLeft = "5%"
     nodeparent.replaceChild(thread,node);
 }
+function deleteInputTag(button){
+    let node = button.parentElement
+    node.remove()
+}
+function createCancelNode(){
+    let button = document.createElement("button")
+    button.innerHTML = `<span class="material-symbols-outlined">cancel</span>`;
+    button.classList.add("deleteComment")
+    button.addEventListener("click",function(){
+        deleteInputTag(button)
+    })
+    return button
+}
 function createSubmitButton(){
     let button = document.createElement("button")
     button.innerHTML = `<span class="material-symbols-outlined">send</span>`;
@@ -99,6 +140,7 @@ function inputTag(){
     let node = document.createElement("div")
     node.classList.add("inputBlockSection")
     node.appendChild(createInputNode())
+    node.appendChild(createCancelNode())
     node.appendChild(createSubmitButton())
     node.style.marginLeft = "5%"
     return node
