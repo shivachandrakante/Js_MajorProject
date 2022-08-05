@@ -1,0 +1,103 @@
+body{
+    margin: 0;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 1rem;
+}
+
+#container{
+    width: 80%;
+    max-width: 1400px;
+    margin: 0 auto ;
+    margin-top: 0.625em;
+    margin-bottom: 3em;
+    background-image: url('background.png');
+    box-sizing: border-box;
+    min-height: 100vh;
+}
+#root{
+    margin-right: 5px;
+}
+
+#addCommentToRoot{
+    text-align: center;
+    border-radius: 10px;
+    padding: 1em;
+    margin: 0.625em auto;
+    border: none;
+    background-color: #9645E9;
+    color: #F7F9FB;
+}
+
+.inputBlockSection{
+    height: 2rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 0.625em;
+    margin-bottom: 0.625em;
+}
+
+.inputBox{
+    width: 80%;
+    border-radius: 1.25em;
+    padding-top: 0.625em;
+    padding-bottom: 0.625em;
+}
+
+.submitComment{
+    width: 2rem;
+    background-color: #9645E9;
+    max-width: 10%;
+    border: none;
+    text-align: center;
+    border-radius: 50%;
+}
+.submitComment:hover,
+.submitComment:focus{
+    transform: 10px;
+}
+.textBlockSection{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+.textBlockSection > div:first-child{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+   
+}
+.textBlockSection > div:nth-child(2){
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    COlumn-gap: 1.25em;
+}
+.textContentAndDelete{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+.textContentAndDelete p{
+    width: 80%;
+    word-wrap: break-word;
+}
+.textContentAndDelete button{
+    width: 10%;
+}
+.likeDislikeAddComment{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    column-gap: 1em;
+}
+
+footer{
+    background-color: #1C1C1C;
+}
+footer p{
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+    color: #F7F9FB;
+}
