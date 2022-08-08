@@ -5,7 +5,7 @@ document.getElementById("addCommentToRoot").addEventListener('click',function(){
 })
 
 document.getElementById("deleteFromRoot").addEventListener('click',function(){
-    deleteInputTag(root)
+    deleteInputTag(deleteFromRoot.parentElement)
     window.setTimeout(() => {
         window.location.reload(true);
     }, 200);
@@ -38,16 +38,34 @@ function createThreadTextBlock(node){
     ThreadTextBlock.appendChild(deleteThreadIcon(node))
     return ThreadTextBlock;
 }
+function increaseLikes(likeIcon){
+    if(!likeIcon.nextSibling.classList.contains("likes")){
+        likeIcon.parentNode.insertBefore(createLikeIconNumber(), likeIcon.nextSibling);
+    }
+    likeIcon.nextSibling.innerHTML = Number(likeIcon.nextSibling.textContent) + 1
+}
 function createLikeIcon(){
     let likeIcon = document.createElement("button")
     likeIcon.classList.add("likeIcon")
     likeIcon.innerHTML = `<span class="material-symbols-outlined">thumb_up</span>`
+    likeIcon.addEventListener('click',function(){
+        increaseLikes(likeIcon)
+    })
     return likeIcon
 }
-function createdisLikeIcon(){
+function decreaseLikes(dislikeIcon){
+    if(!dislikeIcon.nextSibling.classList.contains("likes")){
+        dislikeIcon.parentNode.insertBefore(createLikeIconNumber(), dislikeIcon.nextSibling);
+    }
+    dislikeIcon.nextSibling.innerHTML = Number(dislikeIcon.nextSibling.textContent) + 1
+}
+function createDisLikeIcon(){
     let dislikeIcon = document.createElement("button")
     dislikeIcon.classList.add("dislikeIcon")
     dislikeIcon.innerHTML = `<span class="material-symbols-outlined">thumb_down</span>`
+    dislikeIcon.addEventListener('click',function(){
+        decreaseLikes(dislikeIcon)
+    })
     return dislikeIcon
 }
 function createAddCommentIcon(){
@@ -78,6 +96,16 @@ function unFoldThreads(node){
         node = node.nextSibling
     }
 }
+function createLikeIconNumber(){
+    let LikeIconNumber = document.createElement("div")
+    LikeIconNumber.classList.add("likes")
+    return LikeIconNumber
+}
+function createDisLikeIconNumber(){
+    let DisLikeIconNumber = document.createElement("div")
+    DisLikeIconNumber.classList.add("dislikes")
+    return DisLikeIconNumber
+}
 function CreateExpandIcon(){
     let unFoldIcon = document.createElement("button")
     unFoldIcon.classList.add("expanndIcon")
@@ -95,7 +123,9 @@ function CreateExpandIcon(){
 function createThreadBtnBlock(node){
     let ThreadBtnBlock = document.createElement("div")
     ThreadBtnBlock.appendChild(createLikeIcon())
-    ThreadBtnBlock.appendChild(createdisLikeIcon())
+    //ThreadBtnBlock.appendChild(createLikeIconNumber())
+    ThreadBtnBlock.appendChild(createDisLikeIcon())
+    //ThreadBtnBlock.appendChild(createDisLikeIconNumber())
     ThreadBtnBlock.appendChild(createAddCommentIcon())
     ThreadBtnBlock.appendChild(CreateReplyCommentIcon())
     ThreadBtnBlock.appendChild(CreateExpandIcon())
