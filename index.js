@@ -1,8 +1,16 @@
+const root = document.getElementById("root");
 
 document.getElementById("addCommentToRoot").addEventListener('click',function(){
     addComment(addCommentToRoot)
 })
-const root = document.getElementById("root");
+
+document.getElementById("deleteFromRoot").addEventListener('click',function(){
+    deleteInputTag(root)
+    window.setTimeout(() => {
+        window.location.reload(true);
+    }, 200);
+})
+
 function createInputNode(){
     let inputNode = document.createElement("input")   
     inputNode.type = "text";
@@ -148,11 +156,14 @@ function inputTag(){
 function addComment(blockClicked){
     console.log(blockClicked)
     if(blockClicked.id === "addCommentToRoot"){
-        while(root.hasChildNodes()){
+        console.log("asdasd")
+        /*while(root.hasChildNodes()){
             root.removeChild(root.firstChild)
-        }
+        }*/
         root.appendChild(inputTag())
     } else{
+        // let input = inputTag();
+        // input.scrollIntoView({behavior: "smooth", block: "end", inline: "nearest"});
         blockClicked.appendChild(inputTag())
     }
 }

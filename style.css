@@ -17,8 +17,30 @@ body{
 #root{
     margin-right: 5px;
 }
-
+#header{
+    width: 100%;
+    height: 3rem;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    position: fixed;
+    background-image: url('background.png');
+}
+.headerspacer{
+    height: 3rem;
+}
 #addCommentToRoot{
+    text-align: center;
+    border-radius: 10px;
+    padding: 1em;
+    margin: 0.625em auto;
+    border: none;
+    background-color: #9645E9;
+    color: #F7F9FB;
+}
+#deleteFromRoot{
     text-align: center;
     border-radius: 10px;
     padding: 1em;
@@ -35,10 +57,13 @@ body{
     justify-content: space-between;
     margin-top: 0.625em;
     margin-bottom: 0.625em;
+    flex-wrap: wrap;
+    Column-gap: 1.25em;
+    row-gap: 1.25em;
 }
 
 .inputBox{
-    width: 70%;
+    width: 75%;
     border-radius: 1.25em;
     padding-top: 0.625em;
     padding-bottom: 0.625em;
@@ -67,19 +92,25 @@ body{
 .textBlockSection{
     display: flex;
     flex-direction: column;
+    /*flex-wrap: wrap;*/
     justify-content: space-evenly;
 }
 .textBlockSection > div:first-child{
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     justify-content: space-between;
+    Column-gap: 1.25em;
+    row-gap: 1.25em;
    
 }
 .textBlockSection > div:nth-child(2){
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     justify-content: flex-start;
-    COlumn-gap: 1.25em;
+    Column-gap: 1.25em;
+    row-gap: 1.25em;
 }
 .textContentAndDelete{
     display: flex;
@@ -88,6 +119,7 @@ body{
 }
 .textContentAndDelete p{
     width: 80%;
+    height: auto;
     word-wrap: break-word;
 }
 .textContentAndDelete button{
@@ -101,6 +133,15 @@ body{
     flex-direction: row;
     justify-content: flex-start;
     column-gap: 1em;
+}
+
+.material-symbols-outlined {
+    font-size: 16px !important;;
+    font-variation-settings:
+        'FILL' 0,
+        'wght' 500,
+        'GRAD' 0,
+        'opsz' 20
 }
 
 footer{
