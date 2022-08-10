@@ -1,5 +1,5 @@
 const root = document.getElementById("root");
-
+let inputBoxOpen = false;
 document.getElementById("addCommentToRoot").addEventListener('click',function(){
     addComment(addCommentToRoot)
 })
@@ -14,7 +14,9 @@ document.getElementById("deleteFromRoot").addEventListener('click',function(){
 function createInputNode(){
     let inputNode = document.createElement("input")   
     inputNode.type = "text";
-    inputNode.className = "inputBox"
+    inputNode.className = "inputBox";
+    inputNode.setAttribute('required', '');
+    inputNode.setAttribute('placeholder', 'Enter you Comment');
     return inputNode;
 }
 function threadComment(node){
@@ -111,12 +113,14 @@ function CreateExpandIcon(){
     unFoldIcon.classList.add("expanndIcon")
     unFoldIcon.innerHTML = `<span class="material-symbols-outlined">unfold_less</span>`
     unFoldIcon.addEventListener('click',function(){
-        if(unFoldIcon.innerHTML === `<span class="material-symbols-outlined">unfold_less</span>`){
-            unFoldIcon.innerHTML = `<span class="material-symbols-outlined">unfold_more</span>`
-        } else{
-            unFoldIcon.innerHTML = `<span class="material-symbols-outlined">unfold_less</span>`
-        }
-        unFoldThreads(unFoldIcon.parentElement)
+        setTimeout(() => {
+            if(unFoldIcon.innerHTML === `<span class="material-symbols-outlined">unfold_less</span>`){
+                unFoldIcon.innerHTML = `<span class="material-symbols-outlined">unfold_more</span>`
+            } else{
+                unFoldIcon.innerHTML = `<span class="material-symbols-outlined">unfold_less</span>`
+            }
+            unFoldThreads(unFoldIcon.parentElement)
+        }, 500); 
     })
     return unFoldIcon
 }
@@ -145,11 +149,16 @@ function createThread(node){
 function createComment(button){
     let node = button.parentElement;
     console.log(node.firstChild.value)
+    if(node.firstChild.value.trim() === "" || node.firstChild.value == null){
+        alert("Comment must be filled out");
+        return;
+    }
     let thread = createThread(node)
     let nodeparent = node.parentElement;
     console.log(nodeparent)
     console.log(node)
     thread.style.marginLeft = "5%"
+    inputBoxOpen = false
     nodeparent.replaceChild(thread,node);
 }
 function deleteInputTag(button){
@@ -157,6 +166,7 @@ function deleteInputTag(button){
     node.remove()
 }
 function createCancelNode(){
+    inputBoxOpen = false
     let button = document.createElement("button")
     button.innerHTML = `<span class="material-symbols-outlined">cancel</span>`;
     button.classList.add("deleteComment")
@@ -185,15 +195,21 @@ function inputTag(){
 }
 function addComment(blockClicked){
     console.log(blockClicked)
-    if(blockClicked.id === "addCommentToRoot"){
-        console.log("asdasd")
-        /*while(root.hasChildNodes()){
-            root.removeChild(root.firstChild)
-        }*/
-        root.appendChild(inputTag())
+    if(inputBoxOpen==false){
+        inputBoxOpen = true;
+        if(blockClicked.id === "addCommentToRoot"){
+            console.log("asdasd")
+            /*while(root.hasChildNodes()){
+                root.removeChild(root.firstChild)
+            }*/
+            root.appendChild(inputTag())
+        } else{
+            // let input = inputTag();
+            // input.scrollIntoView({behavior: "smooth", block: "end", inline: "nearest"});
+            blockClicked.appendChild(inputTag())
+        }
     } else{
-        // let input = inputTag();
-        // input.scrollIntoView({behavior: "smooth", block: "end", inline: "nearest"});
-        blockClicked.appendChild(inputTag())
+        alert("Close/Add the comment to already opened input")
     }
+    
 }
